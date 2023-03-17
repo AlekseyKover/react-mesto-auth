@@ -52,6 +52,7 @@
 @import url(./blocks/login/login__input/_item-password/login__input__item-password.css);
 @import url(./blocks/header/__status/header__status.css);
 @import url(./blocks/header/__button/header__button.css);
+@import url(./blocks/popup/_check/popup_check.css);
 /*Блок elements*/
 @import url(./blocks/elements/elements.css);
 @import url(./blocks/element/element.css);

@@ -59,6 +59,7 @@ function App() {
         if (res) {
           setIsSuccess(true);
           setInfoTooltipPopupOpen(true);
+          setRegistered(true);
         }
       })
       .catch((err) => {
@@ -175,6 +176,7 @@ function App() {
     setEditProfileClick(false);
     setAddPlaceClick(false);
     setIsCardPopupOpen(false);
+    setInfoTooltipPopupOpen(false);
   }
 
   useEffect(() => {
@@ -277,7 +279,7 @@ function App() {
           />
 
           <InfoTooltip
-            isOpen={isInfoTooltipPopupOpen}
+            isOpen={handleInfoTooltip}
             title={infoTooltiptext}
             onClose={closeAllPopups}
             image={registered ? oks : fail}
