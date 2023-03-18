@@ -53,6 +53,10 @@
 @import url(./blocks/header/__status/header__status.css);
 @import url(./blocks/header/__button/header__button.css);
 @import url(./blocks/popup/_check/popup_check.css);
+@import url(./blocks/login/__subbtitle/login__subbtitle.css);
+@import url(./blocks/login/__form/login__form.css);
+@import url(./blocks/popup/__image-check/popup__image-check.css);
+@import url(./blocks/popup/__title-check/popup__title-check.css);
 /*Блок elements*/
 @import url(./blocks/elements/elements.css);
 @import url(./blocks/element/element.css);

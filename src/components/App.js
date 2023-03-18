@@ -5,7 +5,6 @@ import Footer from "./landing/Footer";
 import Login from "./landing/Login";
 import api from "../../src/utils/Api";
 import auth from "../utils/auth";
-//import auth from "../utils/Auth";
 import PopupWithForm from "./landing/PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ImagePopup from "./landing/ImagePopup";
@@ -32,7 +31,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
-  const [userData, setUserData] = React.useState("");
   const navigate = useNavigate();
 
   function handelLogin(email, password) {
@@ -40,7 +38,8 @@ function App() {
 
       .authorize(password, email)
       .then((data) => {
-        setUserData(email);
+
+        setEmail(email);
         setLoggedIn(true);
         localStorage.setItem("jwt", data.token);
 
@@ -57,15 +56,15 @@ function App() {
       .register(password, email)
       .then((res) => {
         if (res) {
+          setInfoTooltiptext('Вы успешно зарегестрировались')
           setIsSuccess(true);
           setInfoTooltipPopupOpen(true);
           setRegistered(true);
+          navigate("/sign-in", { replace: true });
         }
       })
       .catch((err) => {
-        console.log(password);
-        console.log(email);
-        setIsSuccess(false);
+        setInfoTooltiptext('Что-то пошло не так!Ропробуйте ещё раз.')
         setInfoTooltipPopupOpen(true);
         console.log(err);
       });
@@ -87,6 +86,13 @@ function App() {
           console.log(`Ошибка: ${error}`);
         });
     }
+  }
+
+  function handleSingOut() {
+    localStorage.removeItem("jwt");
+    setEmail(""); 
+    setLoggedIn(false); 
+    navigate("/sign-in", { replace: true });
   }
 
   function handleCardLike(card) {
@@ -213,7 +219,8 @@ function App() {
                     component={Header}
                     Links="/sign-in"
                     title="Выйти"
-                    email={userData}
+                    email={email}
+                    exit={handleSingOut}
                     ProtectedRoute
                   />
                   <ProtectedRoute
@@ -279,7 +286,7 @@ function App() {
           />
 
           <InfoTooltip
-            isOpen={handleInfoTooltip}
+            isOpen={isInfoTooltipPopupOpen}
             title={infoTooltiptext}
             onClose={closeAllPopups}
             image={registered ? oks : fail}
