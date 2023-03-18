@@ -38,7 +38,6 @@ function App() {
 
       .authorize(password, email)
       .then((data) => {
-
         setEmail(email);
         setLoggedIn(true);
         localStorage.setItem("jwt", data.token);
@@ -46,7 +45,6 @@ function App() {
         navigate("/", { replace: true });
       })
       .catch((error) => {
-        console.log(email, password);
         console.log(`Ошибка: ${error}`);
       });
   }
@@ -64,7 +62,7 @@ function App() {
         }
       })
       .catch((err) => {
-        setInfoTooltiptext('Что-то пошло не так!Ропробуйте ещё раз.')
+        setInfoTooltiptext('Что-то пошло не так!Попробуйте ещё раз.')
         setInfoTooltipPopupOpen(true);
         console.log(err);
       });
